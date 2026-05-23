@@ -2,8 +2,104 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import SectionLabel from '../components/SectionLabel';
+import InlineIcon from '../components/InlineIcon';
 import { blogs } from '../data/blogs';
 import { site } from '../data/site';
+
+const FORMSPREE_ID = 'xwvzqonp';
+const PRIMER_URL = '/downloads/additive_manufacturing_primer.pdf';
+
+function LeadMagnetCard() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return (
+    <motion.div
+      className="bg-surface p-6 sm:p-8 bracket-card bracket-card-bright"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
+    >
+      <div className="flex items-start gap-4 mb-4">
+        <div className="icon-circle flex-shrink-0 mt-1">
+          <svg className="w-5 h-5 text-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-steel mb-1">Additive Manufacturing Primer</h3>
+          <p className="text-steel/50 text-sm leading-relaxed">
+            A technical reference for engineering managers and print farm operators. Covers materials, process fundamentals, calibration methodology, and qualification basics.
+          </p>
+        </div>
+      </div>
+
+      {status === 'success' ? (
+        <div className="bg-grounding p-4 space-y-2">
+          <p className="text-sm text-steel/70">
+            Download link sent to <span className="text-safety">{email}</span>. If it doesn&apos;t arrive:
+          </p>
+          <a
+            href={PRIMER_URL}
+            className="inline-flex items-center text-sm font-semibold text-safety hover:text-[#E6B800] transition-colors"
+          >
+            Download directly
+            <InlineIcon name="arrow" className="ml-1.5 w-4 h-4" />
+          </a>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            required
+            className="input-field flex-1"
+          />
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="inline-flex items-center justify-center px-5 py-3 bg-safety text-grounding font-semibold text-sm hover:bg-[#E6B800] transition-colors disabled:opacity-50"
+          >
+            {status === 'loading' ? 'Sending...' : 'Get the PDF'}
+          </button>
+        </form>
+      )}
+
+      {status === 'error' && (
+        <p className="text-xs text-red-400 mt-2">
+          Something went wrong. Try again or email mirza@amconsulting.in directly.
+        </p>
+      )}
+    </motion.div>
+  );
+}
 
 export default function BlogPage() {
   const [expanded, setExpanded] = useState(null);
@@ -36,6 +132,8 @@ export default function BlogPage() {
           </p>
         </motion.div>
       </section>
+
+      <LeadMagnetCard />
 
       <div className="space-y-6">
         {blogs.map((post, i) => {
