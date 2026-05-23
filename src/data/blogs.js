@@ -13,7 +13,7 @@ export const blogs = [
       },
       {
         type: 'p',
-        text: 'The facility produced functional prototypes and end-use parts. Experienced operators. Modern equipment. But the workflow was a repair loop: print, fail, diagnose, reprint. The operators spent six hours a day troubleshooting. Material waste ran to several lakhs monthly. Deadlines slipped because failures were discovered late.',
+        text: 'The facility produced functional prototypes and end-use parts. Experienced operators. Modern equipment. But the workflow was a repair loop: print, fail, diagnose, reprint. The lead operator spent six hours a day troubleshooting. Combined material scrap, operator overtime, and rework costs ran to several lakhs monthly. Deadlines slipped because failures were discovered late.',
       },
       { type: 'h3', text: 'What sustained the failure' },
       {
@@ -61,7 +61,7 @@ export const blogs = [
       { type: 'h3', text: 'What changed' },
       {
         type: 'p',
-        text: 'The facility went from zero first-pass prints to 92.5% within four weeks. Failures dropped from over 40 per month to fewer than three. Operator troubleshooting time fell from six hours daily to under one. Material waste contracted by roughly 90%. The changes held beyond the engagement: the facility sustained above 90% yield for the following eight weeks and took on a third more volume without adding equipment or staff.',
+        text: 'The facility went from zero first-pass prints to 92.5% within four weeks. Failures dropped from over 40 per month to fewer than three. The lead operator\u2019s troubleshooting time fell from six hours daily to under one. Material waste contracted by roughly 90%. The changes held: the facility sustained above 90% yield for the following eight weeks.',
       },
       {
         type: 'p',
