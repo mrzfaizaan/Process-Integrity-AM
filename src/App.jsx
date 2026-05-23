@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
+import BlogPage from './pages/BlogPage';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -23,6 +24,7 @@ function AppRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/blog" element={<BlogPage />} />
       </Routes>
     </AnimatePresence>
   );
