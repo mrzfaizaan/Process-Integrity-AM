@@ -60,15 +60,13 @@ function LeadMagnetCard() {
       </div>
 
       {status === 'success' ? (
-        <div className="bg-grounding p-4 space-y-2">
-          <p className="text-sm text-steel/70">
-            Download link sent to <span className="text-safety">{email}</span>. If it doesn&apos;t arrive:
-          </p>
+        <div className="bg-grounding p-4 flex items-center justify-between gap-4">
+          <p className="text-sm text-steel/70">Thank you.</p>
           <a
             href={PRIMER_URL}
-            className="inline-flex items-center text-sm font-semibold text-safety hover:text-[#E6B800] transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-safety text-grounding font-semibold text-sm hover:bg-[#E6B800] transition-colors"
           >
-            Download directly
+            Download the Primer
             <InlineIcon name="arrow" className="ml-1.5 w-4 h-4" />
           </a>
         </div>
