@@ -9,7 +9,7 @@ export const contactInfo = [
   {
     icon: 'email',
     title: 'Email',
-    value: 'mirza@amconsulting.in',
+    value: 'fmirza.phd@gmail.com',
     sub: 'Response within 24 hours',
   },
   {

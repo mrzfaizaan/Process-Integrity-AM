@@ -108,7 +108,7 @@ export default function ContactForm() {
 
       {status === 'error' && (
         <p className="text-xs text-red-400 mt-3">
-          Something went wrong. Email mirza@amconsulting.in directly.
+          Something went wrong. Email fmirza.phd@gmail.com directly.
         </p>
       )}
     </form>

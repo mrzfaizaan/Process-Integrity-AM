@@ -6,7 +6,7 @@ export const footerLinks = [
 ];
 
 export const footerContact = [
-  'mirza@amconsulting.in',
+  'fmirza.phd@gmail.com',
   'linkedin.com/in/mirzafaizaan',
   'Bangalore, India',
 ];
