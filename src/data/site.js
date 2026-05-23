@@ -7,5 +7,5 @@ export const site = {
   linkedin: 'linkedin.com/in/mirzafaizaan',
   location: 'Bangalore, India',
   locationNote: 'Onsite across India · Remote worldwide',
-  calendlyUrl: 'https://calendly.com/mirza-am-consulting/discovery',
+  calendlyUrl: 'https://cal.com/fmirza.processintegrity-am',
 };

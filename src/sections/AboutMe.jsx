@@ -30,7 +30,7 @@ export default function AboutMe() {
           <motion.div className="lg:col-span-2 space-y-5" variants={item}>
             <div className="bracket-card bracket-card-bright bg-surface p-2 callout-frame">
               <img
-                src={aboutSection.photo}
+                src={`${import.meta.env.BASE_URL}assets/1000060728.jpg`}
                 alt="Dr. Mirza Faizaan"
                 className="w-full h-auto object-cover"
                 style={{ maxHeight: '400px' }}

@@ -30,7 +30,7 @@ export const calendlyCard = {
   heading: 'Prefer to book directly?',
   body: 'Pick a 30-minute slot \u2014 no back-and-forth emails.',
   cta: 'Schedule on Calendly',
-  url: 'https://calendly.com/mirza-am-consulting/discovery',
+  url: 'https://cal.com/fmirza.processintegrity-am',
 };
 
 export const formOptions = [

@@ -7,5 +7,5 @@ export const navLinks = [
 
 export const ctaLink = {
   label: 'Schedule Diagnostic',
-  href: '/#contact',
+  href: 'https://cal.com/fmirza.processintegrity-am',
 };

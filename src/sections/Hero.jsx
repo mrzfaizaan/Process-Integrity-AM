@@ -67,6 +67,9 @@ export default function Hero() {
           <GhostButton href={hero.ghostCta.href} icon="arrow">
             {hero.ghostCta.text}
           </GhostButton>
+          <GhostButton href={hero.primerCta.href} icon="arrow">
+            {hero.primerCta.text}
+          </GhostButton>
         </motion.div>
 
         <motion.div variants={child} className="grid grid-cols-1 sm:grid-cols-3 gap-5">
