@@ -126,11 +126,11 @@ Lists all 9 services with full detail cards (What it is, Value, Deliverables bul
 
 ### Blog Index (`/blog`)
 
-Lead magnet card (email‑for‑download) at top. Below: search bar, sort controls, post cards (linking to individual `/blog/:slug` pages). Each card shows author, date, excerpt, tags, and like count.
+Lead magnet card (email‑for‑download) at top. Below: search bar, sort controls (newest, oldest, most liked), post cards (linking to individual `/blog/:slug` pages). Each card shows author, date, excerpt, tags, like count, and read count. Page includes canonical URL and `ItemList` schema.
 
 ### Blog Post (`/blog/:slug`)
 
-Individual post page with full content, structured data (Article/BlogPosting schema), author attribution, tags, and like button. Back navigation to `/blog`.
+Individual post page with full content, structured data (`@graph`: BreadcrumbList + BlogPosting with wordCount), `keywords` meta tag, `article:published_time`, `article:author`, `article:tag` meta tags, reading time display, author attribution, tags, and like button. Inline SVG charts loaded from `public/assets/svgs/` with descriptive alt text. Back navigation to `/blog`.
 
 ## Architecture
 
@@ -143,7 +143,7 @@ Individual post page with full content, structured data (Article/BlogPosting sch
 | Routing | React Router v7 (`BrowserRouter`, basename: `/Process-Integrity-AM`) |
 | Animation | Framer Motion 12 |
 | Styling | Tailwind CSS 3 (custom theme in `tailwind.config.js`) |
-| SEO | react‑helmet‑async |
+| SEO | Custom DocumentHead (`src/components/DocumentHead.jsx`, zero deps, direct DOM manipulation) |
 | Fonts | Inter + Roboto Mono (Google Fonts, preconnected in `index.html`) |
 
 ### Project Structure
@@ -158,8 +158,11 @@ website/
 ├── .gitignore              node_modules, dist, .env
 ├── public/
 │   ├── favicon.svg         Diamond‑nozzle favicon
+│   ├── robots.txt           Crawl directives, sitemap pointer
+│   ├── sitemap.xml          URL list with priorities and changefreqs
 │   ├── assets/
-│   │   └── 1000060728.jpg  About Me profile photo
+│   │   ├── 1000060728.jpg   About Me profile photo
+│   │   └── svgs/             Blog chart SVGs (failure-chart, calibration-flow, before-after-stats)
 │   └── downloads/
 │       └── additive_manufacturing_primer.pdf  Lead magnet
 ├── src/
@@ -167,14 +170,15 @@ website/
 │   ├── App.jsx             BrowserRouter, ScrollProgress, background layers, routes
 │   ├── index.css           Tailwind directives + custom component classes
 │   ├── pages/
-│   │   ├── HomePage.jsx    Composes 7 sections
+│   │   ├── HomePage.jsx        Composes 8 sections + Organization/WebSite schema
 │   │   ├── ServicesPage.jsx    Full catalog (9 services)
-│   │   ├── BlogPage.jsx        Lead magnet + post index (search, sort, likes)
-│   │   ├── BlogPostPage.jsx     Individual post page (full content, schema, likes)
+│   │   ├── BlogPage.jsx        Lead magnet + post index (search, sort, likes, ItemList schema)
+│   │   ├── BlogPostPage.jsx    Individual post (content, SVGs, BreadcrumbList+BlogPosting schema, reading time)
 │   │   └── NotFoundPage.jsx    404
 │   ├── sections/           7 self‑contained page sections
-│   ├── components/         28 reusable components (BlogSearch, BlogSort, LikeButton added)
+│   ├── components/         30 reusable components (DocumentHead, BlogSearch, LikeButton added)
 │   ├── data/               12 content files (single source of truth)
+│   ├── lib/                Supabase client + visitor UUID
 │   └── hooks/              3 custom hooks (useScrollReveal, useCountUp, useMediaQuery)
 └── .github/workflows/
     └── deploy.yml           GitHub Actions → GitHub Pages
@@ -199,6 +203,7 @@ Components never import data files directly. Sections bridge data → components
 | Formspree (contact) | `https://formspree.io/f/xgoqzzqo` | `ContactForm.jsx` |
 | Formspree (lead magnet) | `https://formspree.io/f/xwvzqonp` | `BlogPage.jsx` (LeadMagnetCard) |
 | Cal.com (scheduling) | `https://cal.com/fmirza.processintegrity-am` | `CtaButton.jsx`, `CalendlyCard.jsx` |
+| Supabase (blog engagement) | `https://hymxodyqclzygzwnnjso.supabase.co` | `LikeButton.jsx`, `BlogPage.jsx`, `BlogPostPage.jsx` |
 | Google Fonts | `fonts.googleapis.com` (Inter, Roboto Mono) | `index.html` |
 
 ### Key Custom CSS Classes
@@ -222,7 +227,7 @@ Components never import data files directly. Sections bridge data → components
 Push to `main` branch → GitHub Actions triggers:
 1. `checkout@v4`
 2. `setup-node@v4` (Node 22)
-3. `npm ci --legacy-peer-deps`
+3. `npm ci`
 4. `npm run build` (Vite → `dist/`)
 5. `configure-pages@v4` → `upload-pages-artifact@v3` → `deploy-pages@v4`
 
