@@ -24,6 +24,9 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build
+        env:
+          VITE_SUPABASE_URL: https://hymxodyqclzygzwnnjso.supabase.co
+          VITE_SUPABASE_ANON_KEY: sb_publishable_NhbQSYbocKPtDehbV0z1qg_TxBWhA6a
         run: npm run build
 
       - uses: actions/configure-pages@v4
