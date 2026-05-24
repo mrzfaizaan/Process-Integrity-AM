@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import InlineIcon from '../components/InlineIcon';
 import LikeButton from '../components/LikeButton';
@@ -99,22 +99,21 @@ export default function BlogPostPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Helmet>
-        <title>{post.title} | {site.name}</title>
-        <meta name="description" content={post.excerpt} />
-        <meta property="og:title" content={`${post.title} | ${site.name}`} />
-        <meta property="og:description" content={post.excerpt} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`} />
-        <meta property="article:published_time" content={post.date} />
-        <meta property="article:author" content={post.author.name} />
-        {post.tags.map((tag) => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <DocumentHead
+        title={`${post.title} | ${site.name}`}
+        description={post.excerpt}
+        ogTitle={`${post.title} | ${site.name}`}
+        ogDescription={post.excerpt}
+        ogType="article"
+        ogUrl={`https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`}
+        canonical={`https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`}
+        meta={[
+          { property: 'article:published_time', content: post.date },
+          { property: 'article:author', content: post.author.name },
+          ...post.tags.map((tag) => ({ property: 'article:tag', content: tag })),
+        ]}
+        jsonLd={schemaData}
+      />
 
       <Link
         to="/blog"

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import CtaButton from '../components/CtaButton';
 import { site } from '../data/site';
@@ -13,9 +13,7 @@ export default function NotFoundPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <Helmet>
-        <title>Page Not Found | {site.name}</title>
-      </Helmet>
+      <DocumentHead title={`Page Not Found | ${site.name}`} />
 
       <SectionLabel>404</SectionLabel>
       <h1 className="font-bold text-3xl text-steel">Page not found</h1>

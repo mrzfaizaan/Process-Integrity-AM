@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import ServiceDetail from '../components/ServiceDetail';
 import CtaButton from '../components/CtaButton';
@@ -38,14 +38,13 @@ export default function ServicesPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Helmet>
-        <title>Services | {site.name}</title>
-        <meta name="description" content={`${site.name} consulting services. Technical training, print farm audits, process optimization, materials qualification, DFM, and more.`} />
-        <meta property="og:title" content={'Services | ' + site.name} />
-        <meta property="og:description" content={'Technical training, print farm audits, process optimization, materials qualification. PhD-led AM consulting.'} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mrzfaizaan.github.io/Process-Integrity-AM/services" />
-      </Helmet>
+      <DocumentHead
+        title={`Services | ${site.name}`}
+        description={`${site.name} consulting services. Technical training, print farm audits, process optimization, materials qualification, DFM, and more.`}
+        ogTitle={`Services | ${site.name}`}
+        ogDescription="Technical training, print farm audits, process optimization, materials qualification. PhD-led AM consulting."
+        ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/services"
+      />
 
       {/* Page Header */}
       <section>

@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import InlineIcon from '../components/InlineIcon';
 import BlogSearch from '../components/BlogSearch';
@@ -181,14 +181,13 @@ export default function BlogPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Helmet>
-        <title>Insights | {site.name}</title>
-        <meta name="description" content="Technical insights on additive manufacturing operations, process optimization, and materials qualification." />
-        <meta property="og:title" content={'Insights | ' + site.name} />
-        <meta property="og:description" content="Technical writing on AM operations. No marketing. No hot takes. Just what the data says and what held up in production." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mrzfaizaan.github.io/Process-Integrity-AM/blog" />
-      </Helmet>
+      <DocumentHead
+        title={`Insights | ${site.name}`}
+        description="Technical insights on additive manufacturing operations, process optimization, and materials qualification."
+        ogTitle={`Insights | ${site.name}`}
+        ogDescription="Technical writing on AM operations. No marketing. No hot takes. Just what the data says and what held up in production."
+        ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/blog"
+      />
 
       <section>
         <motion.div

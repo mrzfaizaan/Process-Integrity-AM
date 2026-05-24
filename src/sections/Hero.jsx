@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
 import SectionLabel from '../components/SectionLabel';
 import CtaButton from '../components/CtaButton';
 import GhostButton from '../components/GhostButton';
@@ -8,7 +7,6 @@ import GaugeIndicator from '../components/GaugeIndicator';
 import SpecimenTray from '../components/SpecimenTray';
 import HeroSchematic from '../components/HeroSchematic';
 import { hero, heroStats } from '../data/hero';
-import { site } from '../data/site';
 
 const container = {
   hidden: {},
@@ -29,10 +27,6 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={sectionRef} className="relative overflow-hidden">
-      <Helmet>
-        <title>{site.name} | PhD-Led AM Consulting</title>
-        <meta name="description" content={site.description} />
-      </Helmet>
 
       <HeroSchematic scrollYProgress={scrollYProgress} />
 

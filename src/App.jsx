@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import Nav from './components/Nav';
@@ -36,21 +35,19 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <HelmetProvider>
-      <BrowserRouter basename="/Process-Integrity-AM">
-        <ScrollToTop />
-        <ScrollProgress />
-        <div className="relative z-0">
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <div className="absolute inset-0 blueprint-minor opacity-40" />
-            <div className="absolute inset-0 blueprint-major opacity-30" />
-            <div className="absolute inset-0 surface-grain opacity-[0.04]" />
-          </div>
-          <Nav />
-          <AppRoutes />
-          <Footer />
+    <BrowserRouter basename="/Process-Integrity-AM">
+      <ScrollToTop />
+      <ScrollProgress />
+      <div className="relative z-0">
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 blueprint-minor opacity-40" />
+          <div className="absolute inset-0 blueprint-major opacity-30" />
+          <div className="absolute inset-0 surface-grain opacity-[0.04]" />
         </div>
-      </BrowserRouter>
-    </HelmetProvider>
+        <Nav />
+        <AppRoutes />
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
