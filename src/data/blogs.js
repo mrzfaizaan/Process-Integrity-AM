@@ -1,8 +1,14 @@
+export const author = {
+  name: 'Dr. Mirza Faizaan',
+  role: 'Lead Consultant',
+};
+
 export const blogs = [
   {
     slug: '92-5-first-pass-yield',
     title: 'How a 15-Printer Facility Went from 0% to 92.5% First-Pass Yield',
     date: '2026-05-23',
+    author: author,
     tags: ['Yield Improvement', 'Print Farm Operations', 'Calibration', 'Case Study'],
     excerpt:
       'Most AM shops treat calibration as optional maintenance. Here is what changed when a facility made it foundational.',
