@@ -29,7 +29,7 @@ export const contactInfo = [
 export const calendlyCard = {
   heading: 'Prefer to book directly?',
   body: 'Pick a 30-minute slot \u2014 no back-and-forth emails.',
-  cta: 'Schedule on Calendly',
+  cta: 'Book a Call',
   url: 'https://cal.com/fmirza.processintegrity-am',
 };
 
