@@ -208,6 +208,21 @@ export default function BlogPostPage() {
                   </h3>
                 );
               }
+               if (block.type === 'svg') {
+                 const isPath = block.text.startsWith('/');
+                 const src = isPath 
+                   ? `${import.meta.env.BASE_URL}${block.text.slice(1)}`
+                   : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(block.text)}`;
+                 return (
+                   <img
+                     key={j}
+                     src={src}
+                     alt=""
+                     className="w-full my-6 block"
+                     loading="lazy"
+                   />
+                 );
+               }
               return (
                 <p
                   key={j}

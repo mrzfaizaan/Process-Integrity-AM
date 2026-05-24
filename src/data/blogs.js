@@ -48,6 +48,10 @@ export const blogs = [
         text: 'Over three days I logged 40 consecutive prints across the fleet. The failures clustered into three categories. Bed adhesion problems caused roughly six in ten failures. Extrusion inconsistencies, worn nozzles, and clogged gears accounted for another quarter. Slicing errors made up the rest. I also found four printers with measurable axis misalignment and two with extruders far enough out of calibration that they over-extruded by more than 15%.',
       },
       {
+        type: 'svg',
+        text: '/assets/svgs/failure-chart.svg',
+      },
+      {
         type: 'p',
         text: 'The operators knew something was wrong. They did not know what. They had never seen the data laid out.',
       },
@@ -55,6 +59,10 @@ export const blogs = [
       {
         type: 'p',
         text: 'Week one: calibration. I wrote a first-layer protocol that took under ten minutes per printer. Step by step: tram the bed, set nozzle height with a feeler gauge, run a single-layer test patch, measure with calipers, adjust, repeat once. I added an extrusion multiplier calibration using a hollow cube test print. I tuned input shaping on the firmware, which required no additional hardware. I established a maintenance schedule: weekly nozzle cleaning, monthly belt tension checks, quarterly lubrication.',
+      },
+      {
+        type: 'svg',
+        text: '/assets/svgs/calibration-flow.svg',
       },
       {
         type: 'p',
@@ -68,6 +76,10 @@ export const blogs = [
       {
         type: 'p',
         text: 'The facility went from zero first-pass prints to 92.5% within four weeks. Failures dropped from over 40 per month to fewer than three. The lead operator\u2019s troubleshooting time fell from six hours daily to under one. Material waste contracted by roughly 90%. The changes held: the facility sustained above 90% yield for the following eight weeks.',
+      },
+      {
+        type: 'svg',
+        text: '/assets/svgs/before-after-stats.svg',
       },
       {
         type: 'p',
