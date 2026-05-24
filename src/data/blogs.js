@@ -50,6 +50,7 @@ export const blogs = [
       {
         type: 'svg',
         text: '/assets/svgs/failure-chart.svg',
+        alt: 'Donut chart: 60% bed adhesion failures, 25% extrusion issues, 15% slicing errors across 40 print faults',
       },
       {
         type: 'p',
@@ -63,6 +64,7 @@ export const blogs = [
       {
         type: 'svg',
         text: '/assets/svgs/calibration-flow.svg',
+        alt: 'First-layer calibration protocol: 5-step process — tram bed, nozzle height, test patch, measure, adjust — under 10 minutes per printer',
       },
       {
         type: 'p',
@@ -80,6 +82,7 @@ export const blogs = [
       {
         type: 'svg',
         text: '/assets/svgs/before-after-stats.svg',
+        alt: 'Before vs after comparison: first-pass yield 0% to 92.5%, failures 40+ to under 3 per month, troubleshooting 6 hrs/day to under 1 hr/day, material waste reduced by 90%',
       },
       {
         type: 'p',

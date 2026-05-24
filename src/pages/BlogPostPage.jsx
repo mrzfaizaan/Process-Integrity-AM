@@ -57,30 +57,60 @@ export default function BlogPostPage() {
 
   const schemaData = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    image: `${window.location.origin}/Process-Integrity-AM/assets/1000060728.jpg`,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      '@type': 'Person',
-      name: post.author.name,
-      jobTitle: post.author.role,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: site.name,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${window.location.origin}/Process-Integrity-AM/favicon.svg`,
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://mrzfaizaan.github.io/Process-Integrity-AM/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Insights',
+            item: 'https://mrzfaizaan.github.io/Process-Integrity-AM/blog',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+          },
+        ],
       },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${window.location.origin}/Process-Integrity-AM/blog/${post.slug}`,
-    },
+      {
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        image: `https://mrzfaizaan.github.io/Process-Integrity-AM/assets/1000060728.jpg`,
+        datePublished: post.date,
+        dateModified: post.date,
+        author: {
+          '@type': 'Person',
+          name: post.author.name,
+          jobTitle: post.author.role,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: site.name,
+          logo: {
+            '@type': 'ImageObject',
+            url: `https://mrzfaizaan.github.io/Process-Integrity-AM/favicon.svg`,
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`,
+        },
+        wordCount: post.content.reduce((n, b) => n + (b.text || '').split(/\s+/).filter(Boolean).length, 0),
+      },
+    ],
   };
+
+  const wordCount = post.content.reduce((n, b) => n + (b.text || '').split(/\s+/).filter(Boolean).length, 0);
+  const readingTime = Math.max(1, Math.round(wordCount / 200));
 
   const formatDate = (iso) => {
     const d = new Date(iso);
@@ -107,6 +137,7 @@ export default function BlogPostPage() {
         ogType="article"
         ogUrl={`https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`}
         canonical={`https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${post.slug}`}
+        keywords={post.tags}
         meta={[
           { property: 'article:published_time', content: post.date },
           { property: 'article:author', content: post.author.name },
@@ -156,6 +187,9 @@ export default function BlogPostPage() {
             <span className="font-mono text-[10px] tracking-wider uppercase">
               {formatDate(post.date)}
             </span>
+            <span className="font-mono text-[10px] tracking-wider uppercase text-steel/30">
+              ~{readingTime} min read
+            </span>
             <LikeButton slug={post.slug} />
             {readCount != null && readCount > 0 && (
               <span className="inline-flex items-center gap-1 text-xs">
@@ -197,15 +231,15 @@ export default function BlogPostPage() {
           <hr className="border-t border-divider mb-8" />
           <div className="prose-custom space-y-5">
             {post.content.map((block, j) => {
-              if (block.type === 'h3') {
-                return (
-                  <h3
-                    key={j}
-                    className="font-semibold text-steel text-lg pt-4"
-                  >
-                    {block.text}
-                  </h3>
-                );
+               if (block.type === 'h3') {
+                 return (
+                   <h2
+                     key={j}
+                     className="font-semibold text-steel text-lg pt-4"
+                   >
+                     {block.text}
+                   </h2>
+                 );
               }
                if (block.type === 'svg') {
                  const isPath = block.text.startsWith('/');
@@ -216,7 +250,7 @@ export default function BlogPostPage() {
                    <img
                      key={j}
                      src={src}
-                     alt=""
+                     alt={block.alt || ''}
                      className="w-full my-6 block"
                      loading="lazy"
                    />

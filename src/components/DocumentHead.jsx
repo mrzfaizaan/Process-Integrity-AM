@@ -11,6 +11,7 @@ export default function DocumentHead({
   twitterCard = 'summary_large_image',
   canonical,
   jsonLd,
+  keywords,
   meta = [],
 }) {
   const uid = useId();
@@ -85,6 +86,12 @@ export default function DocumentHead({
       m.setAttribute('content', twitterCard);
       set(m);
     }
+    if (keywords) {
+      const m = el('meta');
+      m.setAttribute('name', 'keywords');
+      m.setAttribute('content', typeof keywords === 'string' ? keywords : keywords.join(', '));
+      set(m);
+    }
 
     // Custom meta array
     meta.forEach(({ name, property, content }) => {
@@ -115,7 +122,7 @@ export default function DocumentHead({
     return removeOwn;
   }, [
     uid, title, description, ogTitle, ogDescription, ogImage,
-    ogType, ogUrl, twitterCard, canonical,
+    ogType, ogUrl, twitterCard, canonical, keywords,
     JSON.stringify(jsonLd), JSON.stringify(meta),
   ]);
 

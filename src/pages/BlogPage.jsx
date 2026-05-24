@@ -173,6 +173,16 @@ export default function BlogPage() {
     });
   };
 
+  const blogListSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: blogs.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${b.slug}`,
+    })),
+  }), []);
+
   return (
     <motion.main
       className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-10"
@@ -187,6 +197,8 @@ export default function BlogPage() {
         ogTitle={`Insights | ${site.name}`}
         ogDescription="Technical writing on AM operations. No marketing. No hot takes. Just what the data says and what held up in production."
         ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/blog"
+        canonical="https://mrzfaizaan.github.io/Process-Integrity-AM/blog"
+        jsonLd={blogListSchema}
       />
 
       <section>

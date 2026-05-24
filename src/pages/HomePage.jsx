@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import DocumentHead from '../components/DocumentHead';
 import Hero from '../sections/Hero';
@@ -13,6 +14,28 @@ import { site } from '../data/site';
 
 export default function HomePage() {
   const pageTitle = `${site.name} | PhD-Led AM Consulting`;
+  const baseUrl = 'https://mrzfaizaan.github.io/Process-Integrity-AM';
+
+  const orgSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        name: site.name,
+        url: baseUrl,
+        description: site.description,
+        logo: `${baseUrl}/favicon.svg`,
+        sameAs: [
+          'https://linkedin.com/in/mirzafaizaan',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        name: site.name,
+        url: baseUrl,
+      },
+    ],
+  }), []);
 
   return (
     <motion.main
@@ -27,7 +50,9 @@ export default function HomePage() {
         description={site.description}
         ogTitle={pageTitle}
         ogDescription={site.description}
-        ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/"
+        ogUrl={`${baseUrl}/`}
+        canonical={`${baseUrl}/`}
+        jsonLd={orgSchema}
       />
 
       <Hero />
