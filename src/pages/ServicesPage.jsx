@@ -41,6 +41,10 @@ export default function ServicesPage() {
       <Helmet>
         <title>Services | {site.name}</title>
         <meta name="description" content={`${site.name} consulting services. Technical training, print farm audits, process optimization, materials qualification, DFM, and more.`} />
+        <meta property="og:title" content={'Services | ' + site.name} />
+        <meta property="og:description" content={'Technical training, print farm audits, process optimization, materials qualification. PhD-led AM consulting.'} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mrzfaizaan.github.io/Process-Integrity-AM/services" />
       </Helmet>
 
       {/* Page Header */}
@@ -83,7 +87,7 @@ export default function ServicesPage() {
         viewport={{ once: true }}
         transition={{ duration: 0.45 }}
       >
-        <CtaButton href="/#contact">DISCUSS YOUR PROJECT</CtaButton>
+        <CtaButton href="https://cal.com/fmirza.processintegrity-am">BOOK A DIAGNOSTIC CALL</CtaButton>
       </motion.div>
     </motion.main>
   );

@@ -23,6 +23,10 @@ export default function HomePage() {
       <Helmet>
         <title>{site.name} | PhD-Led AM Consulting</title>
         <meta name="description" content={site.description} />
+        <meta property="og:title" content={site.name + ' | PhD-Led AM Consulting'} />
+        <meta property="og:description" content={site.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mrzfaizaan.github.io/Process-Integrity-AM/" />
       </Helmet>
 
       <Hero />

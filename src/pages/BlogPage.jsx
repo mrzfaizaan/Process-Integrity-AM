@@ -113,6 +113,10 @@ export default function BlogPage() {
       <Helmet>
         <title>Insights | {site.name}</title>
         <meta name="description" content="Technical insights on additive manufacturing operations, process optimization, and materials qualification." />
+        <meta property="og:title" content={'Insights | ' + site.name} />
+        <meta property="og:description" content="Technical writing on AM operations. No marketing. No hot takes. Just what the data says and what held up in production." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mrzfaizaan.github.io/Process-Integrity-AM/blog" />
       </Helmet>
 
       <section>
