@@ -102,7 +102,7 @@ function LeadMagnetCard() {
 
       {status === 'error' && (
         <p className="text-xs text-red-400 mt-2">
-          Something went wrong. Try again or email fmirza.phd@gmail.com directly.
+          Something went wrong. Try again or email mirza@calibratedam.com directly.
         </p>
       )}
     </motion.div>

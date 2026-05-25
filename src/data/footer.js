@@ -6,7 +6,7 @@ export const footerLinks = [
 ];
 
 export const footerContact = [
-  'fmirza.phd@gmail.com',
+  'mirza@calibratedam.com',
   'linkedin.com/in/mirzafaizaan',
   'Bangalore, India',
 ];
