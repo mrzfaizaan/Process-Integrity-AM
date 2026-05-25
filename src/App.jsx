@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
+import { initGA, pageview } from './lib/analytics';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ScrollProgress from './components/ScrollProgress';
@@ -20,6 +21,11 @@ function ScrollToTop() {
 
 function AppRoutes() {
   const location = useLocation();
+
+  useEffect(() => {
+    pageview(location.pathname);
+  }, [location.pathname]);
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -34,6 +40,10 @@ function AppRoutes() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
     <BrowserRouter basename="/">
       <ScrollToTop />
