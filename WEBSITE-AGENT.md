@@ -2,7 +2,7 @@
 
 ## Instructions
 
-This is the marketing site for **Calibrated AM**, an additive manufacturing consultancy. The site is a React + Vite + Framer Motion SPA deployed to GitHub Pages.
+This is the marketing site for **Calibrated AM**, an additive manufacturing consultancy. The site is a React + Vite + Framer Motion SPA deployed to GitHub Pages at `calibratedam.com`.
 
 **Before making any changes:**
 - Read `src/data/site.js` for global brand config
@@ -33,6 +33,27 @@ This is the marketing site for **Calibrated AM**, an additive manufacturing cons
 - External links (Cal.com) open in new tabs via `<a target="_blank">`.
 - CtaButton auto‑detects external URLs (`href.startsWith('http')`) and renders `<a>` instead of `<Link>`.
 
+### SEO rules
+- `DocumentHead.jsx` is the zero‑dependency `<head>` manager. It replaces `react-helmet-async`. Always use it for page‑level meta tags, canonical, JSON‑LD, and Open Graph.
+- Every page must have: `<title>`, `<meta description>`, `<meta og:title>`, `<meta og:description>`, `<link rel="canonical">`.
+- Blog post pages must include: `Article` + `BreadcrumbList` + `BlogPosting` schema as `@graph` JSON‑LD, `keywords` meta, `article:published_time`, `article:author`, `article:tag`.
+- Blog index page must include: `ItemList` schema.
+- Homepage must include: `Organization` + `WebSite` schema.
+- Sitemap (`public/sitemap.xml`) must be updated whenever a page is added or removed.
+
+### Analytics rules
+- `react-ga4` is the GA4 client. Measurement ID: `G-NKFL61NH93`.
+- GA4 initializes ONLY after the user clicks "Accept" on the cookie consent banner (`CookieBanner.jsx`).
+- Consent is stored in `localStorage` under key `calibrated-am-cookie-consent` (values: `accepted` / `declined`).
+- `pageview()` is called on every route change in `App.jsx`.
+- Never load GA4 before consent. Never bypass the consent banner.
+
+### Blog engagement rules
+- `@supabase/supabase-js` powers likes and read counts.
+- Credentials set via Vite env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) in CI. These are public/anonymous keys.
+- Read counts are deduplicated via `blog_reads` table (visitor UUID stored in localStorage).
+- Like counts are tracked in `blog_likes` table.
+
 ### Styling rules
 - Use Tailwind utility classes. Custom CSS lives in `src/index.css` under `@layer components`.
 - Never introduce colors outside the design system palette (see below).
@@ -43,12 +64,12 @@ This is the marketing site for **Calibrated AM**, an additive manufacturing cons
 - Use Framer Motion `variants` + `staggerChildren: 0.1` for card grids.
 - Use `whileHover` with spring physics for interactive elements (stiffness: 300, damping: 20).
 - Use `useScroll` + `useTransform` for parallax. Do not animate `width`/`height`/`top`/`left`.
-- `AnimatePresence` for enter/exit transitions (mobile menu, blog post expand, page transitions).
+- `AnimatePresence` for enter/exit transitions (mobile menu, blog post expand, page transitions, cookie banner).
 - Animate 1‑2 key elements per view maximum. Do not over‑animate.
 
 ### Marketing & SEO skills
 
-The project includes marketing skills in `.opencode/skills/`. Load the relevant skill via the `Skill` tool before working on that domain.
+The project includes marketing skills in `.opencode/skills/`. Load the relevant skill before working on that domain.
 
 | Skill | When to use |
 |-------|-------------|
@@ -85,15 +106,16 @@ The project includes marketing skills in `.opencode/skills/`. Load the relevant 
 
 ## Sitemap
 
-### Routes
+### Routes (6)
 
-| Route | Page | Source |
-|-------|------|--------|
-| `/` | HomePage | `src/pages/HomePage.jsx` |
-| `/services` | ServicesPage | `src/pages/ServicesPage.jsx` |
-| `/blog` | BlogPage | `src/pages/BlogPage.jsx` |
-| `/blog/:slug` | BlogPostPage | `src/pages/BlogPostPage.jsx` |
-| `*` | NotFoundPage | `src/pages/NotFoundPage.jsx` |
+| Route | Page | Source | Schema |
+|-------|------|--------|--------|
+| `/` | HomePage | `src/pages/HomePage.jsx` | Organization + WebSite |
+| `/services` | ServicesPage | `src/pages/ServicesPage.jsx` | — |
+| `/blog` | BlogPage | `src/pages/BlogPage.jsx` | ItemList |
+| `/blog/:slug` | BlogPostPage | `src/pages/BlogPostPage.jsx` | BreadcrumbList + BlogPosting |
+| `/privacy` | PrivacyPage | `src/pages/PrivacyPage.jsx` | — |
+| `*` | NotFoundPage | `src/pages/NotFoundPage.jsx` | — |
 
 ### Homepage Sections (scroll order, all on `/`)
 
@@ -140,48 +162,59 @@ Individual post page with full content, structured data (`@graph`: BreadcrumbLis
 |-------|------|
 | Framework | React 19 |
 | Build | Vite 6 |
-| Routing | React Router v7 (`BrowserRouter`, basename: `/Calibrated-AM`) |
+| Routing | React Router v7 (`BrowserRouter`, basename: `/`) |
 | Animation | Framer Motion 12 |
 | Styling | Tailwind CSS 3 (custom theme in `tailwind.config.js`) |
 | SEO | Custom DocumentHead (`src/components/DocumentHead.jsx`, zero deps, direct DOM manipulation) |
+| Analytics | `react-ga4` (GA4: `G-NKFL61NH93`, cookie consent gated) |
+| Blog backend | `@supabase/supabase-js` (likes, reads) |
 | Fonts | Inter + Roboto Mono (Google Fonts, preconnected in `index.html`) |
 
 ### Project Structure
 
 ```
 website/
-├── index.html              Vite entry (fonts, favicon, root div)
-├── package.json            Dependencies + scripts
-├── vite.config.js          React plugin, base: '/Calibrated-AM/'
-├── tailwind.config.js      Custom colour palette, font families
-├── postcss.config.js       Tailwind + autoprefixer
-├── .gitignore              node_modules, dist, .env
+├── CNAME                    calibaratedam.com (copied to dist/ during CI)
+├── index.html               Vite entry (fonts, favicon, SPA fallback script, root div)
+├── package.json             Dependencies + scripts
+├── vite.config.js           React plugin, base: '/'
+├── tailwind.config.js       Custom colour palette, font families
+├── postcss.config.js        Tailwind + autoprefixer
+├── .gitignore               node_modules, dist, .env
 ├── public/
-│   ├── favicon.svg         Diamond‑nozzle favicon
-│   ├── robots.txt           Crawl directives, sitemap pointer
-│   ├── sitemap.xml          URL list with priorities and changefreqs
+│   ├── 404.html              SPA redirect script (rafgraph/spa-github-pages)
+│   ├── favicon.svg            Diamond‑nozzle favicon
+│   ├── google15f99e601dd25a37.html   Google Search Console verification
+│   ├── robots.txt            Crawl directives, sitemap pointer
+│   ├── sitemap.xml           URL list (5 pages) with priorities and changefreqs
 │   ├── assets/
-│   │   ├── 1000060728.jpg   About Me profile photo
-│   │   └── svgs/             Blog chart SVGs (failure-chart, calibration-flow, before-after-stats)
+│   │   ├── 1000060728.jpg     About Me profile photo (also OG image)
+│   │   └── svgs/              Blog chart SVGs (failure-chart, calibration-flow, before-after-stats)
 │   └── downloads/
-│       └── additive_manufacturing_primer.pdf  Lead magnet
+│       └── additive_manufacturing_primer.pdf   Lead magnet
 ├── src/
-│   ├── main.jsx            ReactDOM.createRoot entry
-│   ├── App.jsx             BrowserRouter, ScrollProgress, background layers, routes
-│   ├── index.css           Tailwind directives + custom component classes
+│   ├── main.jsx              ReactDOM.createRoot entry
+│   ├── App.jsx               BrowserRouter, CookieBanner, ScrollProgress, background layers, routes, GA4 pageview
+│   ├── index.css             Tailwind directives + 18 custom component classes
 │   ├── pages/
-│   │   ├── HomePage.jsx        Composes 8 sections + Organization/WebSite schema
-│   │   ├── ServicesPage.jsx    Full catalog (9 services)
-│   │   ├── BlogPage.jsx        Lead magnet + post index (search, sort, likes, ItemList schema)
-│   │   ├── BlogPostPage.jsx    Individual post (content, SVGs, BreadcrumbList+BlogPosting schema, reading time)
-│   │   └── NotFoundPage.jsx    404
-│   ├── sections/           7 self‑contained page sections
-│   ├── components/         30 reusable components (DocumentHead, BlogSearch, LikeButton added)
-│   ├── data/               12 content files (single source of truth)
-│   ├── lib/                Supabase client + visitor UUID
-│   └── hooks/              3 custom hooks (useScrollReveal, useCountUp, useMediaQuery)
+│   │   ├── HomePage.jsx      Composes 8 sections + Organization/WebSite schema
+│   │   ├── ServicesPage.jsx  Full catalog (9 services, scroll to hash)
+│   │   ├── BlogPage.jsx      Lead magnet + post index (search, sort, likes, ItemList schema)
+│   │   ├── BlogPostPage.jsx  Individual post (content, SVGs, BreadcrumbList+BlogPosting, reading time)
+│   │   ├── PrivacyPage.jsx   Cookie & analytics policy
+│   │   └── NotFoundPage.jsx   Custom 404
+│   ├── sections/             8 self‑contained page sections
+│   ├── components/           30 reusable components
+│   ├── data/                 13 content files (single source of truth)
+│   ├── lib/
+│   │   ├── analytics.js      GA4 init + pageview + consent check
+│   │   └── supabase.js       Supabase client
+│   ├── blogs/                Blog post source files
+│   │   ├── ideas.md          Topic registry (8 pillars, 10 queued topics)
+│   │   └── published/        Published posts (Markdown with frontmatter)
+│   └── hooks/                3 custom hooks (useScrollReveal, useCountUp, useMediaQuery)
 └── .github/workflows/
-    └── deploy.yml           GitHub Actions → GitHub Pages
+    └── deploy.yml             GitHub Actions → GitHub Pages
 ```
 
 ### Data Flow
@@ -202,8 +235,9 @@ Components never import data files directly. Sections bridge data → components
 |---------|--------------|-----------|
 | Formspree (contact) | `https://formspree.io/f/xgoqzzqo` | `ContactForm.jsx` |
 | Formspree (lead magnet) | `https://formspree.io/f/xwvzqonp` | `BlogPage.jsx` (LeadMagnetCard) |
-| Cal.com (scheduling) | `https://cal.com/fmirza.processintegrity-am` | `CtaButton.jsx`, `CalendlyCard.jsx` |
+| Cal.com (scheduling) | `https://cal.com/mirza.calibrate-am` | `CtaButton.jsx`, `CalendlyCard.jsx` |
 | Supabase (blog engagement) | `https://hymxodyqclzygzwnnjso.supabase.co` | `LikeButton.jsx`, `BlogPage.jsx`, `BlogPostPage.jsx` |
+| GA4 (analytics) | `G-NKFL61NH93` (client-side, consent gated) | `analytics.js`, `CookieBanner.jsx` |
 | Google Fonts | `fonts.googleapis.com` (Inter, Roboto Mono) | `index.html` |
 
 ### Key Custom CSS Classes
@@ -211,6 +245,8 @@ Components never import data files directly. Sections bridge data → components
 | Class | File | Purpose |
 |-------|------|---------|
 | `bracket-card` | `index.css` | Corner L‑brackets (thin safety‑yellow pseudo‑elements) |
+| `bracket-card-bright` | `index.css` | Brighter bracket variant |
+| `card-lift` | `index.css` | Hover lift + border reveal |
 | `ghost-btn` | `index.css` | Outline button (divider border → safety on hover) |
 | `icon-circle` | `index.css` | 40px yellow‑tinted circle behind icons |
 | `section-divider-line` | `index.css` | Gradient horizontal rule + diamond marker |
@@ -221,6 +257,10 @@ Components never import data files directly. Sections bridge data → components
 | `blueprint-major` | `index.css` | 120px yellow‑tinted grid texture |
 | `surface-grain` | `index.css` | Fractal noise overlay |
 | `callout-frame` | `index.css` | Engineering dimension lines (About photo) |
+| `input-field` | `index.css` | Standard form input with grounding bg + yellow focus |
+| `hash-marks` | `index.css` | Measurement tick marks on dividers |
+| `test-report-header` | `index.css` | Dashed yellow bottom border (case study) |
+| `sparkline-bar` | `index.css` | Inline bar chart (stat counters) |
 
 ### Deploy
 
@@ -228,7 +268,8 @@ Push to `main` branch → GitHub Actions triggers:
 1. `checkout@v4`
 2. `setup-node@v4` (Node 22)
 3. `npm ci`
-4. `npm run build` (Vite → `dist/`)
-5. `configure-pages@v4` → `upload-pages-artifact@v3` → `deploy-pages@v4`
+4. `npm run build` (Vite → `dist/`, Supabase env vars injected)
+5. `cp CNAME dist/`
+6. `configure-pages@v4` → `upload-pages-artifact@v3` → `deploy-pages@v4`
 
-Live at: `https://mrzfaizaan.github.io/Calibrated-AM/`
+Live at: `https://calibratedam.com`
