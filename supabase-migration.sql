@@ -44,17 +44,38 @@ CREATE POLICY "allow_anon_insert_own" ON blog_likes
 CREATE POLICY "allow_anon_delete_own" ON blog_likes
   FOR DELETE USING (true);
 
+-- Table 3: Per-visitor read tracking (prevents inflating read count)
+CREATE TABLE IF NOT EXISTS blog_reads (
+  slug        text NOT NULL,
+  visitor_id  text NOT NULL,
+  created_at  timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (slug, visitor_id)
+);
+
+ALTER TABLE blog_reads ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read
+CREATE POLICY "allow_public_read" ON blog_reads
+  FOR SELECT USING (true);
+
 -- RPC: Increment read_count (called from BlogPostPage on mount)
-CREATE OR REPLACE FUNCTION increment_read(post_slug text)
+-- Now takes visitor_id to deduplicate reads per visitor
+CREATE OR REPLACE FUNCTION increment_read(post_slug text, visitor_id text)
 RETURNS void
 LANGUAGE plpgsql
 SECURITY DEFINER
 AS $$
 BEGIN
-  INSERT INTO blog_engagement (slug, read_count, like_count)
-  VALUES (post_slug, 1, 0)
-  ON CONFLICT (slug)
-  DO UPDATE SET read_count = blog_engagement.read_count + 1;
+  INSERT INTO blog_reads (slug, visitor_id)
+  VALUES (post_slug, visitor_id)
+  ON CONFLICT DO NOTHING;
+
+  IF FOUND THEN
+    INSERT INTO blog_engagement (slug, read_count, like_count)
+    VALUES (post_slug, 1, 0)
+    ON CONFLICT (slug)
+    DO UPDATE SET read_count = blog_engagement.read_count + 1;
+  END IF;
 END;
 $$;
 

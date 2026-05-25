@@ -5,7 +5,7 @@ import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import InlineIcon from '../components/InlineIcon';
 import LikeButton from '../components/LikeButton';
-import { supabase } from '../lib/supabase';
+import { supabase, getVisitorId } from '../lib/supabase';
 import { blogs, author } from '../data/blogs';
 import { site } from '../data/site';
 
@@ -16,8 +16,10 @@ export default function BlogPostPage() {
 
   useEffect(() => {
     if (slug) {
-      supabase.rpc('increment_read', { post_slug: slug }).then(({ error }) => {
-        if (error) console.warn('increment_read failed:', error);
+      getVisitorId().then((visitorId) => {
+        supabase.rpc('increment_read', { post_slug: slug, visitor_id: visitorId }).then(({ error }) => {
+          if (error) console.warn('increment_read failed:', error);
+        });
       });
     }
   }, [slug]);
