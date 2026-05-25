@@ -43,7 +43,7 @@ export default function ServicesPage() {
         description={`${site.name} consulting services. Technical training, print farm audits, process optimization, materials qualification, DFM, and more.`}
         ogTitle={`Services | ${site.name}`}
         ogDescription="Technical training, print farm audits, process optimization, materials qualification. PhD-led AM consulting."
-        ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/services"
+        ogUrl="https://mrzfaizaan.github.io/Calibrated-AM/services"
       />
 
       {/* Page Header */}
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         viewport={{ once: true }}
         transition={{ duration: 0.45 }}
       >
-        <CtaButton href="https://cal.com/fmirza.processintegrity-am">BOOK A DIAGNOSTIC CALL</CtaButton>
+        <CtaButton href="https://cal.com/mirza.calibrate-am">BOOK A DIAGNOSTIC CALL</CtaButton>
       </motion.div>
     </motion.main>
   );

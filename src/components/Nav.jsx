@@ -43,7 +43,7 @@ export default function Nav() {
           to="/"
           className="font-bold text-lg tracking-tight text-steel hover:text-safety transition-colors"
         >
-          Process Integrity<span className="text-safety">AM</span>
+          Calibrated<span className="text-safety">AM</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-3 gap-8">
           <div>
             <span className="font-bold text-lg tracking-tight text-steel">
-              Process Integrity<span className="text-safety">AM</span>
+              Calibrated<span className="text-safety">AM</span>
             </span>
             <p className="text-steel/40 text-xs leading-relaxed mt-2 max-w-xs">
               {site.tagline}

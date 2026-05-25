@@ -1,8 +1,8 @@
-# WEBSITE‑AGENT.md — Process Integrity AM
+# WEBSITE‑AGENT.md — Calibrated AM
 
 ## Instructions
 
-This is the marketing site for **Process Integrity AM**, an additive manufacturing consultancy. The site is a React + Vite + Framer Motion SPA deployed to GitHub Pages.
+This is the marketing site for **Calibrated AM**, an additive manufacturing consultancy. The site is a React + Vite + Framer Motion SPA deployed to GitHub Pages.
 
 **Before making any changes:**
 - Read `src/data/site.js` for global brand config
@@ -140,7 +140,7 @@ Individual post page with full content, structured data (`@graph`: BreadcrumbLis
 |-------|------|
 | Framework | React 19 |
 | Build | Vite 6 |
-| Routing | React Router v7 (`BrowserRouter`, basename: `/Process-Integrity-AM`) |
+| Routing | React Router v7 (`BrowserRouter`, basename: `/Calibrated-AM`) |
 | Animation | Framer Motion 12 |
 | Styling | Tailwind CSS 3 (custom theme in `tailwind.config.js`) |
 | SEO | Custom DocumentHead (`src/components/DocumentHead.jsx`, zero deps, direct DOM manipulation) |
@@ -152,7 +152,7 @@ Individual post page with full content, structured data (`@graph`: BreadcrumbLis
 website/
 ├── index.html              Vite entry (fonts, favicon, root div)
 ├── package.json            Dependencies + scripts
-├── vite.config.js          React plugin, base: '/Process-Integrity-AM/'
+├── vite.config.js          React plugin, base: '/Calibrated-AM/'
 ├── tailwind.config.js      Custom colour palette, font families
 ├── postcss.config.js       Tailwind + autoprefixer
 ├── .gitignore              node_modules, dist, .env
@@ -231,4 +231,4 @@ Push to `main` branch → GitHub Actions triggers:
 4. `npm run build` (Vite → `dist/`)
 5. `configure-pages@v4` → `upload-pages-artifact@v3` → `deploy-pages@v4`
 
-Live at: `https://mrzfaizaan.github.io/Process-Integrity-AM/`
+Live at: `https://mrzfaizaan.github.io/Calibrated-AM/`

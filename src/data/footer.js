@@ -11,4 +11,4 @@ export const footerContact = [
   'Bangalore, India',
 ];
 
-export const copyright = '\u00a9 2026 Process Integrity AM. All rights reserved.';
+export const copyright = '\u00a9 2026 Calibrated AM. All rights reserved.';

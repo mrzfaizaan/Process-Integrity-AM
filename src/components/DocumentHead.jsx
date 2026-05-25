@@ -5,7 +5,7 @@ export default function DocumentHead({
   description,
   ogTitle,
   ogDescription,
-  ogImage = 'https://mrzfaizaan.github.io/Process-Integrity-AM/assets/1000060728.jpg',
+  ogImage = 'https://mrzfaizaan.github.io/Calibrated-AM/assets/1000060728.jpg',
   ogType = 'website',
   ogUrl,
   twitterCard = 'summary_large_image',

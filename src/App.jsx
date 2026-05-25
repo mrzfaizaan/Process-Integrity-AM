@@ -35,7 +35,7 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/Process-Integrity-AM">
+    <BrowserRouter basename="/Calibrated-AM">
       <ScrollToTop />
       <ScrollProgress />
       <div className="relative z-0">

@@ -179,7 +179,7 @@ export default function BlogPage() {
     itemListElement: blogs.map((b, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `https://mrzfaizaan.github.io/Process-Integrity-AM/blog/${b.slug}`,
+      url: `https://mrzfaizaan.github.io/Calibrated-AM/blog/${b.slug}`,
     })),
   }), []);
 
@@ -196,8 +196,8 @@ export default function BlogPage() {
         description="Technical insights on additive manufacturing operations, process optimization, and materials qualification."
         ogTitle={`Insights | ${site.name}`}
         ogDescription="Technical writing on AM operations. No marketing. No hot takes. Just what the data says and what held up in production."
-        ogUrl="https://mrzfaizaan.github.io/Process-Integrity-AM/blog"
-        canonical="https://mrzfaizaan.github.io/Process-Integrity-AM/blog"
+        ogUrl="https://mrzfaizaan.github.io/Calibrated-AM/blog"
+        canonical="https://mrzfaizaan.github.io/Calibrated-AM/blog"
         jsonLd={blogListSchema}
       />
 

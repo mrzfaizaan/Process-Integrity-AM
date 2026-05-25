@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Process-Integrity-AM/',
+  base: '/Calibrated-AM/',
 });
