@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mrzfaizaan.github.io/Process-Integrity-AM/sitemap.xml
+Sitemap: https://calibratedam.com/sitemap.xml
