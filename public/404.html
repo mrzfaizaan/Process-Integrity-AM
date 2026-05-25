@@ -7,7 +7,7 @@
     // SPA redirect for GitHub Pages — redirects unknown routes to the app,
     // preserving the path so React Router can handle it.
     // After: rafgraph/spa-github-pages (MIT)
-    var segmentsToKeep = 1; // keep /Calibrated-AM/
+    var segmentsToKeep = 0; // keep /Calibrated-AM/
     var l = window.location;
     l.replace(
       l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +

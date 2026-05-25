@@ -14,7 +14,7 @@ import { site } from '../data/site';
 
 export default function HomePage() {
   const pageTitle = `${site.name} | PhD-Led AM Consulting`;
-  const baseUrl = 'https://mrzfaizaan.github.io/Calibrated-AM';
+  const baseUrl = 'https://calibratedam.com';
 
   const orgSchema = useMemo(() => ({
     '@context': 'https://schema.org',

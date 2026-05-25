@@ -43,7 +43,7 @@ export default function ServicesPage() {
         description={`${site.name} consulting services. Technical training, print farm audits, process optimization, materials qualification, DFM, and more.`}
         ogTitle={`Services | ${site.name}`}
         ogDescription="Technical training, print farm audits, process optimization, materials qualification. PhD-led AM consulting."
-        ogUrl="https://mrzfaizaan.github.io/Calibrated-AM/services"
+        ogUrl="https://calibratedam.com/services"
       />
 
       {/* Page Header */}

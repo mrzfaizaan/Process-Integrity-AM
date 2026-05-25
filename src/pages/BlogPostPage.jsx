@@ -67,13 +67,13 @@ export default function BlogPostPage() {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://mrzfaizaan.github.io/Calibrated-AM/',
+            item: 'https://calibratedam.com/',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Insights',
-            item: 'https://mrzfaizaan.github.io/Calibrated-AM/blog',
+            item: 'https://calibratedam.com/blog',
           },
           {
             '@type': 'ListItem',
@@ -86,7 +86,7 @@ export default function BlogPostPage() {
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.excerpt,
-        image: `https://mrzfaizaan.github.io/Calibrated-AM/assets/1000060728.jpg`,
+        image: `https://calibratedam.com/assets/1000060728.jpg`,
         datePublished: post.date,
         dateModified: post.date,
         author: {
@@ -99,12 +99,12 @@ export default function BlogPostPage() {
           name: site.name,
           logo: {
             '@type': 'ImageObject',
-            url: `https://mrzfaizaan.github.io/Calibrated-AM/favicon.svg`,
+            url: `https://calibratedam.com/favicon.svg`,
           },
         },
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': `https://mrzfaizaan.github.io/Calibrated-AM/blog/${post.slug}`,
+          '@id': `https://calibratedam.com/blog/${post.slug}`,
         },
         wordCount: post.content.reduce((n, b) => n + (b.text || '').split(/\s+/).filter(Boolean).length, 0),
       },
@@ -137,8 +137,8 @@ export default function BlogPostPage() {
         ogTitle={`${post.title} | ${site.name}`}
         ogDescription={post.excerpt}
         ogType="article"
-        ogUrl={`https://mrzfaizaan.github.io/Calibrated-AM/blog/${post.slug}`}
-        canonical={`https://mrzfaizaan.github.io/Calibrated-AM/blog/${post.slug}`}
+        ogUrl={`https://calibratedam.com/blog/${post.slug}`}
+        canonical={`https://calibratedam.com/blog/${post.slug}`}
         keywords={post.tags}
         meta={[
           { property: 'article:published_time', content: post.date },
