@@ -17,7 +17,7 @@ export const caseStudy = {
 };
 
 export const supportingStats = [
-  { value: 40, suffix: '%', label1: 'Faster Production', label2: 'Input Shaping' },
+  { value: 40, suffix: '%', label1: 'Faster Print Speeds', label2: 'Input Shaping' },
   { value: 30, suffix: '+', label1: 'SOPs Written', label2: 'Across 6 Functions' },
   { value: 20, suffix: '%', label1: 'Print Time Reduction', label2: 'Slicing Optimization' },
   { value: 4, suffix: '', label1: 'Operators Trained', label2: 'To Autonomous Operation' },

@@ -5,7 +5,7 @@ import DocumentHead from '../components/DocumentHead';
 import SectionLabel from '../components/SectionLabel';
 import ServiceDetail from '../components/ServiceDetail';
 import CtaButton from '../components/CtaButton';
-import { servicesSection, services } from '../data/services';
+import { servicesSection, primaryServices, relatedServices } from '../data/services';
 import { site } from '../data/site';
 
 const container = {
@@ -64,19 +64,55 @@ export default function ServicesPage() {
         </motion.div>
       </section>
 
-      {/* Service Detail Cards */}
+      {/* Primary Services */}
       <motion.div
         className="space-y-6"
         variants={container}
         initial="hidden"
         animate="visible"
       >
-        {services.map((s) => (
+        {primaryServices.map((s) => (
           <motion.div key={s.id} variants={item}>
             <ServiceDetail {...s} />
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Related Capabilities */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+        >
+          <SectionLabel>Related Capabilities</SectionLabel>
+          <h2 className="font-bold text-2xl sm:text-3xl text-steel mb-2">
+            Additional <span className="text-safety">Expertise</span>
+          </h2>
+          <p className="text-steel/50 text-sm leading-relaxed mb-8 max-w-2xl">
+            Complementary capabilities available as standalone engagements or integrated into larger programs.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {relatedServices.map((s) => (
+              <motion.div
+                key={s.id}
+                className="bg-surface p-5 bracket-card"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35 }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-[10px] text-safety/60 tracking-wider uppercase">{s.badge}</span>
+                </div>
+                <h3 className="font-semibold text-steel text-sm mb-1">{s.title}</h3>
+                <p className="text-steel/50 text-xs leading-relaxed">{s.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
 
       {/* Global CTA */}
       <motion.div

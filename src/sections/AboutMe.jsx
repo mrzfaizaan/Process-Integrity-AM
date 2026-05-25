@@ -37,7 +37,7 @@ export default function AboutMe() {
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {aboutSection.stats.map((stat, i) => (
                 <motion.div
                   key={i}

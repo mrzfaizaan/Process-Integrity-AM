@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import SectionLabel from '../components/SectionLabel';
 import ServiceCard from '../components/ServiceCard';
 import GhostButton from '../components/GhostButton';
-import { servicesSection, services } from '../data/services';
+import { servicesSection, primaryServices } from '../data/services';
 
 const container = {
   hidden: {},
@@ -15,7 +15,7 @@ const item = {
 };
 
 export default function ServicesOverview() {
-  const topServices = services.slice(0, 6);
+  const topServices = primaryServices.slice(0, 4);
 
   return (
     <section id="services">

@@ -2,7 +2,7 @@ export const problemSection = {
   label: 'The Diagnosis',
   heading: 'Your AM operation has systemic failures',
   intro:
-    'Most print farms lose 10\u201330% of revenue to failed prints, rework, and slow throughput. These are the four root causes we fix.',
+    'In our experience, most print farms lose substantial revenue to failed prints, rework, and slow throughput. These are the four root causes we fix.',
 };
 
 export const problems = [

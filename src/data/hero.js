@@ -1,8 +1,8 @@
 export const hero = {
   label: 'Process Integrity AM',
   headlineParts: {
-    before: 'Your print farm is losing ',
-    highlight: '10\u201330% of revenue',
+    before: 'In our experience, print farms lose ',
+    highlight: 'significant revenue',
     after: ' to failed prints.',
   },
   subtitle:
@@ -34,10 +34,10 @@ export const heroStats = [
   },
   {
     type: 'number',
-    value: '40',
+    value: '20',
     suffix: '%',
-    label: 'Faster Production',
-    sublabel: '<8% failure rate sustained',
-    pct: 40,
+    label: 'Print Time Reduced',
+    sublabel: 'Slicing optimization case study',
+    pct: 20,
   },
 ];

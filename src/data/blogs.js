@@ -1,6 +1,6 @@
 export const author = {
   name: 'Dr. Mirza Faizaan',
-  role: 'Lead Consultant',
+  role: 'PhD \u00b7 Polymer Additive Manufacturing',
 };
 
 export const blogs = [
