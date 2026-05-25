@@ -3,6 +3,7 @@ export const footerLinks = [
   { label: 'Blog', href: '/blog' },
   { label: 'Services', href: '/services' },
   { label: 'Contact', href: '/#contact' },
+  { label: 'Privacy Policy', href: '/privacy' },
 ];
 
 export const footerContact = [
